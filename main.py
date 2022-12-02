@@ -7,6 +7,8 @@ from matplotlib import pyplot as plt
 git commit -a -m <message>
 git push origin main
 """
+
+
 def read_csv(file_path, tick):
     """
     @params:
@@ -149,7 +151,21 @@ def main():
     returns_Train = returns_timeseries(Train)
     returns_train_allocated = returns_allocated(returns_Train, weights)
     covariance_matrix = variance_matrix(returns_Train)
-    histogram_returns(returns_train_allocated)
+    training_variance = variance_timeseries(covariance_matrix, weights)
+    training_volatility = volatility_timeseries(covariance_matrix, weights)
+
+    print(training_variance)
+    print(training_volatility)
+
+
+    
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     main()

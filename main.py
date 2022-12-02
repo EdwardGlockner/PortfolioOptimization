@@ -137,11 +137,29 @@ def volatility_timeseries(VarianceMatrix, Weights):
     """
     return np.sqrt(variance_timeseries(VarianceMatrix, Weights))
 
-def monte_carlo_simulation():
+def monte_carlo_simulation(Portfolio, varianceMatrix, numSimulations=10000):
     PortfolioReturns = []
     PortfolioWeights = []
     PortfolioVolatility = []
-    numAssets
+    numAssets = len(Portfolio.columns)
+    individual_returns = Portfolio.resample("Y").last().pct_change().mean()
+
+    for port in range(numSimulations):
+        weights = np.random.random(numAssets)
+        weights = weights/np.sum(weights)
+        PortfolioWeights.append(weights)
+        returns = np.dot(weights, individual_returns)
+        PortfolioReturns.append(returns)
+        var = varianceMatrix.mul(weights, axis=0).mul(weights, axis=1).sum().sum()
+        sd = np.sqrt(var)
+        ann_sd = sd*np.sqrt(250)
+        PortfolioVolatility.append(ann_sd)
+
+    data = {"Returns" : PortfolioReturns, "Volatility" : PortfolioVolatility}
+    for counter, symbol in enumerate(Portfolio.columns.tolist()):
+        data[symbol + " weight"] = [w[counter] for w in PortfolioWeights]
+
+    return pd.DataFrame(data)
 
 
 
@@ -160,11 +178,8 @@ def main():
     training_variance = variance_timeseries(covariance_matrix, weights)
     training_volatility = volatility_timeseries(covariance_matrix, weights)
 
-    print(training_variance)
-    print(training_volatility)
-
-
-    
+    mc = monte_carlo_simulation(Portfolio=Train, varianceMatrix=covariance_matrix)
+    print(mc.head())
 
 
 

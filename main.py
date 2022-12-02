@@ -10,7 +10,7 @@ git push origin main
 
 from functions import *
 
-def main():
+def run_calculations():
     GOOG = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/GOOG.csv", "GOOG")
     AMZN = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/AMZN.csv", "AMZN")
     TSLA = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/TSLA.csv", "TSLA")
@@ -31,7 +31,12 @@ def main():
     print("Sharpe ratio: ", sharpe_ratio)
     print(optimal_portfolio)
 
+    #return tuple with sharpe ratio before/after optimization
 
+
+def main():
+
+    print("Hello world")
 
 if __name__ == "__main__":
     main()

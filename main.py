@@ -36,7 +36,7 @@ def run_calculations():
 
 def main():
 
-    print("Hello world")
+    run_calculations()
 
 if __name__ == "__main__":
     main()

@@ -40,8 +40,8 @@ def split_timeseries(timeSeries):
 
     Splits a dataframe into a training set containing 80% of the data, and a testing set containing 
     """
-    Train = timeSeries[0 : round(len(timeSeries)*0.70)]
-    Test = timeSeries[round(len(timeSeries)*0.70) : len(timeSeries)]
+    Train = timeSeries[0 : round(len(timeSeries)*0.95)]
+    Test = timeSeries[round(len(timeSeries)*0.95) : len(timeSeries)]
     return Train, Test
 
 def uniform_weights(timeSeries):

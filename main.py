@@ -3,6 +3,10 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 
+
+#
+
+
 def read_csv(file_path, tick):
     """
     @params:

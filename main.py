@@ -164,9 +164,11 @@ def monte_carlo_simulation(Portfolio, varianceMatrix, numSimulations=10000):
 def optimal_sharpe_ratio(PortfolioVersions):
     rf = 0.01
     optimal_risky_portfolio = PortfolioVersions.iloc[((PortfolioVersions["Returns"] - rf)/PortfolioVersions["Volatility"]).idxmax()]
+    return optimal_risky_portfolio
 
 def calculate_sharpe_ratio(portfolio):
-    print("Sharpe ration: ", (portfolio["Returns"] - rf)/portfolio["Volatility"])
+    rf = 0.01
+    return (portfolio["Returns"]-rf)/portfolio["Volatility"]
 
 def main():
     GOOG = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/GOOG.csv", "GOOG")
@@ -185,12 +187,9 @@ def main():
 
     mc = monte_carlo_simulation(Portfolio=Train, varianceMatrix=covariance_matrix)
     optimal_portfolio = optimal_sharpe_ratio(mc)
+    sharpe_ratio = calculate_sharpe_ratio(optimal_portfolio)
+    print("Sharpe ratio: ", sharpe_ratio)
     print(optimal_portfolio)
-
-
-
-
-
 
 
 

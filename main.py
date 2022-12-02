@@ -3,7 +3,10 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 
-
+"""
+git commit -a -m <message>
+git push origin main
+"""
 def read_csv(file_path, tick):
     """
     @params:

@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 
-print("test")
 
 
 def read_csv(file_path, tick):

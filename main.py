@@ -43,8 +43,8 @@ def split_timeseries(timeSeries):
 
     Splits a dataframe into a training set containing 80% of the data, and a testing set containing 
     """
-    Train = timeSeries[0 : round(len(timeSeries)*0.80)]
-    Test = timeSeries[round(len(timeSeries)*0.80) : len(timeSeries)]
+    Train = timeSeries[0 : round(len(timeSeries)*0.70)]
+    Test = timeSeries[round(len(timeSeries)*0.70) : len(timeSeries)]
     return Train, Test
 
 def uniform_weights(timeSeries):
@@ -161,7 +161,12 @@ def monte_carlo_simulation(Portfolio, varianceMatrix, numSimulations=10000):
 
     return pd.DataFrame(data)
 
+def optimal_sharpe_ratio(PortfolioVersions):
+    rf = 0.01
+    optimal_risky_portfolio = PortfolioVersions.iloc[((PortfolioVersions["Returns"] - rf)/PortfolioVersions["Volatility"]).idxmax()]
 
+def calculate_sharpe_ratio(portfolio):
+    print("Sharpe ration: ", (portfolio["Returns"] - rf)/portfolio["Volatility"])
 
 def main():
     GOOG = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/GOOG.csv", "GOOG")
@@ -179,7 +184,8 @@ def main():
     training_volatility = volatility_timeseries(covariance_matrix, weights)
 
     mc = monte_carlo_simulation(Portfolio=Train, varianceMatrix=covariance_matrix)
-    print(mc.head())
+    optimal_portfolio = optimal_sharpe_ratio(mc)
+    print(optimal_portfolio)
 
 
 

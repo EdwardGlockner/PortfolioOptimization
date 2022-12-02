@@ -132,45 +132,12 @@ def volatility_timeseries(VarianceMatrix, Weights):
     """
     return np.sqrt(variance_timeseries(VarianceMatrix, Weights))
 
-def monte_carlo_simulation():
-    """
-    @params:
-
-    @returns:
-    
-    
-    """
-    PortfolioReturns = []
-    PortfolioVolatility = []
-    PortfolioWeights = []
-
-    numAssets = len(Train.columns)
-    numSimulations = 10000
-    individual_rets = Train.resample ('Y').last ().pct_change ().mean ()
-
-    for port in range (numSimulations):
-        # Randomly generate weigh combination
-        weights = np.random.random(numAssets)
-        # Normalize weight so that they sum to 1
-        weights = weights/np.sum(weights)
-        PortfolioWeights.append(weights)
-        # Returns are the dot product of individual expected returns of asset and its weights
-        returns = np. dot (weights, individual_rets)
-        PortfolioReturns.append(returns)
-        # Computing Portfolio Variance
-        var = VarianceMatrix.mul(weights, axis=0) .mul(weights, axis=1) .sum () .sum ()
-        # Daily standard deviation : volatility is square root of variance
-        sd = np.sqrt(var)
-        # Annualizing the standard deviation will give us the volatility
-        ann_sd = sd*np.sqrt(250)
-        PortfolioVolatility.append(ann_sd)
-
 
 
 def main():
-    GOOG = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/Projekt/Data/GOOG.csv", "GOOG")
-    AMZN = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/Projekt/Data/AMZN.csv", "AMZN")
-    TSLA = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/Projekt/Data/TSLA.csv", "TSLA")
+    GOOG = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/GOOG.csv", "GOOG")
+    AMZN = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/AMZN.csv", "AMZN")
+    TSLA = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/TSLA.csv", "TSLA")
 
     Portfolio = merge_dataframes(GOOG, AMZN, TSLA)
     Train, Test = split_timeseries(Portfolio)
@@ -179,7 +146,7 @@ def main():
     returns_Train = returns_timeseries(Train)
     returns_train_allocated = returns_allocated(returns_Train, weights)
     covariance_matrix = variance_matrix(returns_Train)
-
+    histogram_returns(returns_train_allocated)
 
 if __name__ == "__main__":
     main()

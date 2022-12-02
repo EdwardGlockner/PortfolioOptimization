@@ -2,13 +2,15 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 
-#
-# Create the individual stocks as dataframes
-#
+print("hello world")
 
 def read_csv(file_path, tick):
     """
-    
+    @params:
+
+    @returns:
+
+    Reads a file_path for a given ticker, and returns a dataframe with a column: close.
     """
     temp = pd.read_csv(file_path, parse_dates=[0], index_col=0)
     temp.rename(columns={"Close" : tick}, inplace = True)
@@ -17,7 +19,11 @@ def read_csv(file_path, tick):
 
 def merge_dataframes(*args):
     """
-    
+    @params:
+
+    @returns:
+
+    Merges dataframes into one dataframe.
     """
     Portfolio = args[0]
     for i in range(1, len(args)):
@@ -26,14 +32,21 @@ def merge_dataframes(*args):
 
 def split_timeseries(timeSeries):
     """
-    
+    @params:
+
+    @returns:
+
+    Splits a dataframe into a training set containing 80% of the data, and a testing set containing 
     """
-    Train = timeSeries[0 : round(len(timeSeries)*0.85)]
-    Test = timeSeries[round(len(timeSeries)*0.85) : len(timeSeries)]
+    Train = timeSeries[0 : round(len(timeSeries)*0.80)]
+    Test = timeSeries[round(len(timeSeries)*0.80) : len(timeSeries)]
     return Train, Test
 
 def uniform_weights(timeSeries):
     """
+    @params:
+
+    @returns:
     
     """
     numAssets = len(timeSeries.columns)
@@ -41,6 +54,9 @@ def uniform_weights(timeSeries):
 
 def plot_timeSeries(timeSeries):
     """
+    @params:
+
+    @returns:
     
     """
     timeSeries.plot()
@@ -48,18 +64,27 @@ def plot_timeSeries(timeSeries):
 
 def returns_timeseries(timeSeries):
     """
+    @params:
+
+    @returns:
     
     """
     return timeSeries.pct_change()
 
 def returns_allocated(returns_timeseries, weights):
     """
+    @params:
+
+    @returns:
     
     """
     return returns_timeseries.dot(weights)
 
 def plot_returns(returns):
     """
+    @params:
+
+    @returns:
     
     """
     returns.plot(colormap= "jet", title = "sdfsdf")
@@ -69,6 +94,9 @@ def plot_returns(returns):
 
 def histogram_returns(returns):
     """
+    @params:
+
+    @returns:
     
     """
     returns.hist(bins=40, grid=True, figsize=(7,4), color='#86bf91', zorder=2, rwidth=0.9)
@@ -79,24 +107,36 @@ def histogram_returns(returns):
 
 def variance_matrix(returns):
     """
+    @params:
+
+    @returns:
     
     """
     return returns.cov()*252
 
 def variance_timeseries(VarianceMatrix, Weights):
     """
+    @params:
+
+    @returns:
     
     """
     return np.transpose(Weights)@VarianceMatrix@Weights
 
 def volatility_timeseries(VarianceMatrix, Weights):
     """
+    @params:
+
+    @returns:
     
     """
     return np.sqrt(variance_timeseries(VarianceMatrix, Weights))
 
 def monte_carlo_simulation():
     """
+    @params:
+
+    @returns:
     
     
     """

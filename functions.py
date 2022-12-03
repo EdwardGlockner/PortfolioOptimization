@@ -40,8 +40,8 @@ def split_timeseries(timeSeries):
 
     Splits a dataframe into a training set containing 80% of the data, and a testing set containing 
     """
-    Train = timeSeries[0 : round(len(timeSeries)*0.95)]
-    Test = timeSeries[round(len(timeSeries)*0.95) : len(timeSeries)]
+    Train = timeSeries[0 : round(len(timeSeries)*0.950)]
+    Test = timeSeries[round(len(timeSeries)*0.950) : len(timeSeries)]
     return Train, Test
 
 def uniform_weights(timeSeries):
@@ -139,8 +139,7 @@ def monte_carlo_simulation(Portfolio, varianceMatrix, numSimulations=10000):
     PortfolioWeights = []
     PortfolioVolatility = []
     numAssets = len(Portfolio.columns)
-    individual_returns = Portfolio.resample("Y").last().pct_change().mean()
-
+    individual_returns = Portfolio.resample("D").last().pct_change().mean()
     for port in range(numSimulations):
         weights = np.random.random(numAssets)
         weights = weights/np.sum(weights)
@@ -155,6 +154,7 @@ def monte_carlo_simulation(Portfolio, varianceMatrix, numSimulations=10000):
     data = {"Returns" : PortfolioReturns, "Volatility" : PortfolioVolatility}
     for counter, symbol in enumerate(Portfolio.columns.tolist()):
         data[symbol + " weight"] = [w[counter] for w in PortfolioWeights]
+
 
     return pd.DataFrame(data)
 

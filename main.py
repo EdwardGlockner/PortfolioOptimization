@@ -11,9 +11,9 @@ git push origin main
 from functions import *
 
 def run_calculations():
-    GOOG = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/GOOG.csv", "GOOG")
-    AMZN = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/AMZN.csv", "AMZN")
-    TSLA = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/TSLA.csv", "TSLA")
+    GOOG = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/HP.csv", "GOOG")
+    AMZN = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/KO.csv", "AMZN")
+    TSLA = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/AMZN.csv", "TSLA")
 
     Portfolio = merge_dataframes(GOOG, AMZN, TSLA)
     Train, Test = split_timeseries(Portfolio)
@@ -34,7 +34,7 @@ def run_calculations():
 
     weights_uniform = [1/3, 1/3, 1/3]
     weights_optimal = [optimal_portfolio["GOOG weight"], optimal_portfolio["AMZN weight"], optimal_portfolio["TSLA weight"]]
-
+    print(weights_optimal)
     individual_returns_uniform = Test.resample("D").last().pct_change().mean()
     individual_returns_optimal = Test.resample("D").last().pct_change().mean()
 

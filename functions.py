@@ -134,7 +134,7 @@ def volatility_timeseries(VarianceMatrix, Weights):
     """
     return np.sqrt(variance_timeseries(VarianceMatrix, Weights))
 
-def monte_carlo_simulation(Portfolio, varianceMatrix, numSimulations=10000):
+def monte_carlo_simulation(Portfolio, varianceMatrix, numSimulations=20000):
     PortfolioReturns = []
     PortfolioWeights = []
     PortfolioVolatility = []

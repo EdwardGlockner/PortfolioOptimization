@@ -135,6 +135,12 @@ def volatility_timeseries(VarianceMatrix, Weights):
     return np.sqrt(variance_timeseries(VarianceMatrix, Weights))
 
 def monte_carlo_simulation(Portfolio, varianceMatrix, numSimulations=20000):
+    """
+    @params:
+
+    @returns:
+
+    """
     PortfolioReturns = []
     PortfolioWeights = []
     PortfolioVolatility = []
@@ -159,11 +165,23 @@ def monte_carlo_simulation(Portfolio, varianceMatrix, numSimulations=20000):
     return pd.DataFrame(data)
 
 def optimal_sharpe_ratio(PortfolioVersions):
+    """
+    @params:
+
+    @returns:
+
+    """
     rf = 0.01
     optimal_risky_portfolio = PortfolioVersions.iloc[((PortfolioVersions["Returns"] - rf)/PortfolioVersions["Volatility"]).idxmax()]
     return optimal_risky_portfolio
 
 def calculate_sharpe_ratio(portfolio):
+    """
+    @params:
+
+    @returns:
+    
+    """
     rf = 0.01
     return (portfolio["Returns"]-rf)/portfolio["Volatility"]
 

@@ -11,15 +11,21 @@ git push origin main
 from functions import *
 
 def run_calculations():
+    # First read the csv files
     GOOG = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/CVS.csv", "GOOG")
     AMZN = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/BRK-B.csv", "AMZN")
     TSLA = read_csv("/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/COST.csv", "TSLA")
 
-    Portfolio = merge_dataframes(GOOG, AMZN, TSLA)
-    Train, Test = split_timeseries(Portfolio)
+    # Merge the csv files into a portfolio dataframe
+    portfolio = merge_dataframes(GOOG, AMZN, TSLA)
 
-    weights = uniform_weights(Portfolio)
-
+    # Split the dataframe into a train set, and a test set. The train set is used to calibrate the allocation 
+    # optimization, and the test set is for validating if the allocation leads to an increase in the sharpe ratio
+    Train, Test = split_timeseries(portfolio)
+    
+    # Uniform weights of the portfolio
+    weights = uniform_weights(portfolio)
+    
     returns_Train = returns_timeseries(Train)
     returns_train_allocated = returns_allocated(returns_Train, weights)
     covariance_matrix = variance_matrix(returns_Train)

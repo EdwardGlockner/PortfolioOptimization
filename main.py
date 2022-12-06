@@ -8,6 +8,9 @@ git commit -a -m <message>
 git push origin main
 """
 
+
+
+
 from functions import *
 
 def run_calculations():
@@ -57,8 +60,6 @@ def run_calculations():
     sd_optimal = np.sqrt(var_optimal)
     ann_sd_optimal = sd_optimal*np.sqrt(250)
     sharpe_test_optimal = (rtrns_optimal - rf)/ann_sd_optimal
-
-
 
     print("Sharpe ratio uniform: ", sharpe_test_uniform)
     print("Sharpe ratio optimal: ", sharpe_test_optimal)

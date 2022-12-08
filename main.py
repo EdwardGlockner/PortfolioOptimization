@@ -23,10 +23,9 @@ def simulate(portfolios, path):
         rtrns_test = returns_timeseries(test)
         covar_matrix = variance_matrix(rtrns_train)
 
-        #plot_heatmap(covar_matrix)
+        plot_heatmap(covar_matrix)
         mc_train = monte_carlo_simulation(Portfolio = train, varianceMatrix= covar_matrix)
         optimal_portfolio = optimal_sharpe_ratio(mc_train)
-        print(optimal_portfolio)
         results.append(run_live(rtrns_test, test, optimal_portfolio))
 
     return results
@@ -69,17 +68,15 @@ def main():
 
     portfolios = [] # A list of all different portfolios we are going to test
 
-    for i in range(0, 15):
-        new_portfolio = random.sample(tickers,4)
-        portfolios.append(new_portfolio)
-
+    #for i in range(0, 15):
+    #    new_portfolio = random.sample(tickers,4)
+    #    portfolios.append(new_portfolio)
+    portfolios.append(["KO", "CVS", "FDX", "HP"])
     path = "/Users/edwardglockner/Library/CloudStorage/OneDrive-Uppsalauniversitet/Fristående Kurser/Inferensteori I/PortfolioOptimization/Data/"
     results = simulate(portfolios, path)
 
     for i in range(0, len(results)):
         print_results(results[i][0], results[i][1])
-
-
 
 if __name__ == "__main__":
     main()

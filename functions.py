@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
-
+import seaborn as sns
 
 # Here all the functions will be declared
 
@@ -19,7 +19,7 @@ def read_csv(file_path, tick):
     temp.drop(["Open", "High", "Low", "Adj Close", "Volume"], axis = 1, inplace = True)
     return temp
 
-def merge_dataframes(*args):
+def merge_dataframes(args):
     """
     @params:
 
@@ -185,3 +185,6 @@ def calculate_sharpe_ratio(portfolio):
     rf = 0.01
     return (portfolio["Returns"]-rf)/portfolio["Volatility"]
 
+def plot_heatmap(covariance_matrix):
+    ax = sns.heatmap(covariance_matrix, linewidth=0.5)
+    plt.show()

@@ -40,7 +40,7 @@
 
 Edward Glöckner - [@linkedin](https://www.linkedin.com/in/edwardglockner/) - edward.glockner5@gmail.com
 
-Project Link: [https://github.com/EdwardGlockner/Wave-Equation-Simulation](https://github.com/EdwardGlockner/Wave-Equation-Simulation)
+Project Link: [https://github.com/EdwardGlockner/PortfolioOptimization](https://github.com/EdwardGlockner/PortfolioOptimization)
 
 
 <!-- Links -->
@@ -48,7 +48,6 @@ Project Link: [https://github.com/EdwardGlockner/Wave-Equation-Simulation](https
 
 Here are some helpful links:
 
- - [Wave equation](https://en.wikipedia.org/wiki/Wave_equation)
- - [Finite difference](https://en.wikipedia.org/wiki/Finite_difference)
- - [Runge kutta](https://en.wikipedia.org/wiki/Runge–Kutta_methods)
+ - [Modern Portfolio Theory](https://en.wikipedia.org/wiki/Modern_portfolio_theory)
+
 
